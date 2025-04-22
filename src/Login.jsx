@@ -37,7 +37,14 @@ export default function LoginPage() {
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) throw error
-      setMessage({ text: 'Logged in successfully!', isError: false })
+      
+      setMessage({ text: 'Logged in successfully! Redirecting...', isError: false })
+      
+      // Add a slight delay before redirect to show the success message
+      setTimeout(() => {
+        window.location.href = 'https://fintrack-fd.vercel.app/';
+      }, 1000);
+      
     } catch (error) {
       setMessage({ text: error.message, isError: true })
     } finally {
